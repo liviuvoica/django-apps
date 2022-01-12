@@ -1,0 +1,14 @@
+1. tutorial for todo web application
+https://www.youtube.com/watch?v=4RWFvXDUmjo&t=8s
+
+2. tutorial for basic oop python
+https://www.youtube.com/watch?v=MikphENIrOo
+https://www.tutorialspoint.com/python/index.htm
+https://realpython.com/
+https://www.analyticsvidhya.com/blog/2020/09/object-oriented-programming/#h2_5
+
+3. Django project ideas and tutorials
+https://pythonistaplanet.com/django-project-ideas/
+https://www.techgeekbuzz.com/django-projects/
+https://www.youtube.com/watch?v=rHux0gMZ3Eg
+https://www.youtube.com/watch?v=VY6MZGPKR5c
