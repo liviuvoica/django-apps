@@ -14,3 +14,5 @@ https://www.youtube.com/watch?v=rHux0gMZ3Eg
 https://www.youtube.com/watch?v=VY6MZGPKR5c
 https://www.youtube.com/watch?v=jmX27FrCqqs
 https://www.youtube.com/watch?v=B38aDwUpcFc
+https://www.udemy.com/course/django-django-rest-framework-build-rest-api-in-python/?couponCode=C8E27D1902D79FD1E36C
+https://www.udemy.com/course/complete-django-masterclass/
