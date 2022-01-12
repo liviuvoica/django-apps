@@ -12,9 +12,3 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Group
         fields = ['url', 'name']
-
-# Map the Customer model to the CustomerSerializer class
-class CustomerSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Customer
-        fields = ['url', 'name']
