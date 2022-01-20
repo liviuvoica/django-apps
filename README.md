@@ -26,3 +26,7 @@ Common [DJANGO](https://docs.djangoproject.com/en/4.0/intro/tutorial01/ "DJANGO 
 <span style="color:white; font-weight:normal;">         (django version):</span> python -m django --version
 <span style="color:white; font-weight:normal;">             (run server):</span> python manage.py runserver specify_different_port</pre>
 </span>
+
+each time you modify a model, run the following to update the database:
+python manage.py makemigrations app_name
+python manage.py migrate
