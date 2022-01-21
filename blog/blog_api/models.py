@@ -12,6 +12,9 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     class Meta:
         ordering = ['created']
+    
+    def __str__(self):
+        return self.title
         
 # Blog categories model will have a many to one relationship
 # with the User model via 'owner' foreign key and a many to many relationship with
@@ -26,6 +29,9 @@ class Category(models.Model):
     class Meta:
         ordering = ['created']
         verbose_name_plural = 'Categories'
+    
+    def __str__(self):
+        return self.name
 
 # Blog post comments model will have a many to one relationship
 # with the User model via 'owner' foreign key and with the Post model via 'post' foreign key
@@ -38,3 +44,6 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['created']
+    
+    def __str__(self):
+        return str(self.owner).upper()
