@@ -1,3 +1,6 @@
+from asyncio.windows_events import NULL
+from turtle import title
+from django.forms import ValidationError
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from blog_api.models import Post
@@ -37,6 +40,12 @@ class PostSerializer(serializers.ModelSerializer):
             'owner',
             'comments'
         ]
+
+    # Validate the Post title that the user sends via the API endpoint
+    def validate_title(self, post_title):
+        # Check if the inserted data matches the one from the database
+        if post_title.isdigit() == True:
+            raise ValidationError("The post title you have inserted ('" + post_title + "') must only contain letters! Please try again!")
 
 # CommentSerializer class will inherit properties and methods from the ModelSerializer class
 class CommentSerializer(serializers.ModelSerializer):

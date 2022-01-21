@@ -6,7 +6,7 @@ from django.db import models
 # with the User model via 'owner' foreign key
 # related_name refers to a custom access name for the current model
 class Post(models.Model):
-    title = models.CharField(max_length=100, blank=True, default='')
+    title = models.TextField(max_length=100, blank=True, default='')
     body = models.TextField(blank=True, default='')
     owner = models.ForeignKey('auth.User', related_name='posts', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
