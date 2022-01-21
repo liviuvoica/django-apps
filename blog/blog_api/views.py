@@ -1,10 +1,7 @@
-from rest_framework import generics
+from rest_framework import generics, permissions
 from blog_api import serializers
 from django.contrib.auth.models import User
-from blog_api.models import Post
-from blog_api.models import Comment
-from blog_api.models import Category
-from rest_framework import permissions
+from blog_api.models import Post, Comment, Category
 from blog_api.permissions import IsOwnerOrReadOnly
 
 # Create your views here.
