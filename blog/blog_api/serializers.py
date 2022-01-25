@@ -43,9 +43,13 @@ class PostSerializer(serializers.ModelSerializer):
 
     # Validate the Post title that the user sends via the API endpoint
     def validate_title(self, post_title):
-        # Check if the inserted data matches the one from the database
+        # Check if the inserted title contains numbers
+        if post_title == '':
+            raise ValidationError("You did not inserted anything in the title field! Please try again!")
         if post_title.isdigit() == True:
             raise ValidationError("The post title you have inserted ('" + post_title + "') must only contain letters! Please try again!")
+        if len(post_title) <= 10:
+            raise ValidationError("The post title you have inserted ('" + post_title + "') is too short! It must have a minimum of 10 characters! Please try again!")
 
 # CommentSerializer class will inherit properties and methods from the ModelSerializer class
 class CommentSerializer(serializers.ModelSerializer):
