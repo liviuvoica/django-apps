@@ -19,4 +19,4 @@ class ErrorAndNotification(models.Model):
         verbose_name_plural = 'Error and Notifications Messages'
     
     def __str__(self):
-        return self.name
+        return self.notify_code
