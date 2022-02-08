@@ -35,7 +35,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'admin_interface',
     'colorfield',
-    'admin_reorder',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -60,17 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'admin_reorder.middleware.ModelAdminReorder',
 ]
-
-ADMIN_REORDER = (
-    {'app': 'auth', 'models': ('auth.User', 'auth.Group')},
-    {'app': 'blog_api', 'models': ('blog_api.Category', 'blog_api.Subcategory', 'blog_api.Article', 'blog_api.Comment')},
-    {'app': 'contact_api', 'models': ('contact_api.Contact')},
-    {'app': 'newsletter_api', 'models': ('newsletter_api.Newsletter')},
-    {'app': 'error_and_notification_api', 'models': ('error_and_notification_api.ErrorAndNotification')},
-    {'app': 'admin_interface', 'models': ('admin_interface.Theme')},
-)
 
 ROOT_URLCONF = 'blog.urls'
 
