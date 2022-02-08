@@ -9,16 +9,25 @@ from blog_api.models import Comment
 class CategoryAdmin(admin.ModelAdmin):
     list_display = (
         'id',
-        'blog_category_title',
-        'blog_category_short_description',
-        'blog_category_description',
-        'blog_category_is_active',
-        'blog_image_card_url',
-        'blog_category_path',
+        'get_blog_category_title',
+        'get_blog_category_short_description',
+        'get_blog_category_is_active',
         'get_owner',
         'created_at',
         'updated_at'
     )
+    
+    def get_blog_category_title(self, obj):
+        return str(obj.blog_category_title).upper()
+    get_blog_category_title.short_description = "Category title"
+    
+    def get_blog_category_short_description(self, obj):
+        return str(obj.blog_category_short_description)
+    get_blog_category_short_description.short_description = "Short description"
+    
+    def get_blog_category_is_active(self, obj):
+        return str(obj.blog_category_is_active)
+    get_blog_category_is_active.short_description = "Is active ?"
     
     def get_owner(self, obj):
         return str(obj.owner).upper()

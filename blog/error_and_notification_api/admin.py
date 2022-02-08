@@ -6,16 +6,23 @@ from error_and_notification_api.models import ErrorAndNotification
 class ErrorAndNotificationAdmin(admin.ModelAdmin):
     list_display = (
         'id',
-        'notify_code',
-        'notify_short_description',
-        'notify_reference',
-        'get_owner',
+        'get_notify_code',
+        'get_notify_short_description',
+        'get_notify_reference',
         'created_at',
         'updated_at'
     )
 
-    def get_owner(self, obj):
-        return str(obj.owner).upper()
-    get_owner.short_description = "owner"
+    def get_notify_code(self, obj):
+        return str(obj.notify_code)
+    get_notify_code.short_description = "Code"
+
+    def get_notify_short_description(self, obj):
+        return str(obj.notify_short_description)
+    get_notify_short_description.short_description = "Short description"
+
+    def get_notify_reference(self, obj):
+        return str(obj.notify_reference)
+    get_notify_reference.short_description = "Documentation reference"
 
 admin.site.register(ErrorAndNotification, ErrorAndNotificationAdmin)
