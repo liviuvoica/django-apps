@@ -15,7 +15,7 @@ class Category(models.Model):
     blog_image_card_url = models.CharField(max_length=255, blank=False, default='')
     blog_category_path = models.CharField(max_length=255, blank=False, default='')
     owner = models.ForeignKey('auth.User', related_name='categories', on_delete=models.CASCADE)
-    blog_subcategories = models.ManyToManyField('Subcategory', related_name='subcategories')
+    blog_subcategories = models.ManyToManyField('Subcategory', related_name='subcategories', blank=True)
     created_at = models.DateTimeField(blank=True, default=datetime.now())
     updated_at = models.DateTimeField(blank=True, default=datetime.now())
 
@@ -24,7 +24,7 @@ class Category(models.Model):
         verbose_name_plural = 'Categories'
     
     def __str__(self):
-        return self.name
+        return self.blog_category_title
 
 # Blog subcategories model will have a many to one relationship
 # with the User model via 'owner' foreign key and a many to many relationship with
@@ -38,7 +38,7 @@ class Subcategory(models.Model):
     blog_subcategory_is_active = models.BooleanField(blank=False, default=False)
     blog_subcategory_path = models.CharField(max_length=255, blank=False, default='')
     owner = models.ForeignKey('auth.User', related_name='subcategories', on_delete=models.CASCADE)
-    blog_articles = models.ManyToManyField('Article', related_name='articles')
+    blog_articles = models.ManyToManyField('Article', related_name='articles', blank=True)
     created_at = models.DateTimeField(blank=True, default=datetime.now())
     updated_at = models.DateTimeField(blank=True, default=datetime.now())
     class Meta:
@@ -46,7 +46,7 @@ class Subcategory(models.Model):
         verbose_name_plural = 'Subcategories'
     
     def __str__(self):
-        return self.title
+        return self.blog_subcategory_title
 
 # Blog articles model will have a many to one relationship
 # with the User model via 'owner' foreign key and a many to many relationship with
@@ -65,7 +65,7 @@ class Article(models.Model):
     blog_article_likes = models.IntegerField(blank=False, default='')
     blog_article_dislikes = models.IntegerField(blank=False, default='')
     owner = models.ForeignKey('auth.User', related_name='articles', on_delete=models.CASCADE)
-    blog_article_comments = models.ManyToManyField('Comment', related_name='comments')
+    blog_article_comments = models.ManyToManyField('Comment', related_name='comments', blank=True)
     created_at = models.DateTimeField(blank=True, default=datetime.now())
     updated_at = models.DateTimeField(blank=True, default=datetime.now())
     class Meta:
@@ -73,7 +73,7 @@ class Article(models.Model):
         verbose_name_plural = 'Articles'
     
     def __str__(self):
-        return self.title
+        return self.blog_article_title
 
 # Blog article comments model will have a many to one relationship
 # with the User model via 'owner' foreign key and a many to many relationship with
@@ -94,4 +94,4 @@ class Comment(models.Model):
         verbose_name_plural = 'Article comments'
     
     def __str__(self):
-        return self.title
+        return self.full_name

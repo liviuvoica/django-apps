@@ -20,4 +20,4 @@ class Contact(models.Model):
         verbose_name_plural = 'Contact me'
     
     def __str__(self):
-        return self.name
+        return self.full_name
