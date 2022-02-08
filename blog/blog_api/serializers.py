@@ -3,9 +3,11 @@ from turtle import title
 from django.forms import ValidationError
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from blog_api.models import Post
-from blog_api.models import Comment
+
 from blog_api.models import Category
+from blog_api.models import Subcategory
+from blog_api.models import Article
+from blog_api.models import Comment
 
 
 # CategorySerializer class will inherit properties and methods from the ModelSerializer class
@@ -19,39 +21,62 @@ class CategorySerializer(serializers.ModelSerializer):
         # In this way, the post field has write access by default. When a user creates a new comment, they also see the post it belongs to.
         fields = [
             'id',
-            'name',
+            'blog_category_title',
+            'blog_category_short_description',
+            'blog_category_description',
+            'blog_category_is_active',
+            'blog_image_card_url',
+            'blog_category_path',
             'owner',
-            'posts'
+            'subcategories'
         ]
 
-# PostSerializer class will inherit properties and methods from the ModelSerializer class
-class PostSerializer(serializers.ModelSerializer):
+# CategorySerializer class will inherit properties and methods from the ModelSerializer class
+class SubcategorySerializer(serializers.ModelSerializer):
     # Define the foreign key for the current model
     owner = serializers.ReadOnlyField(source='owner.username')
-    comments = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     class Meta:
         # Define the model that should be associated with this serializer
-        model = Post
+        model = Subcategory
         # Indicates which fields from the model should be included in the serializer
+        # In this way, the post field has write access by default. When a user creates a new comment, they also see the post it belongs to.
         fields = [
             'id',
-            'title',
-            'body',
-            'owner',
-            'comments'
+            'blog_category_id',
+            'blog_subcategory_title',
+            'blog_subcategory_short_description',
+            'blog_subcategory_description',
+            'blog_subcategory_is_active',
+            'blog_subcategory_path',
+            'owner'
         ]
 
-    # Validate the Post title that the user sends via the API endpoint
-    def validate_title(self, post_title):
-        # Check if the inserted title contains numbers
-        if post_title == '':
-            raise ValidationError("You did not inserted anything in the title field! Please try again!")
-        if post_title.isdigit() == True:
-            raise ValidationError("The post title you have inserted ('" + post_title + "') must only contain letters! Please try again!")
-        if len(post_title) <= 10:
-            raise ValidationError("The post title you have inserted ('" + post_title + "') is too short! It must have a minimum of 10 characters! Please try again!")
+# CategorySerializer class will inherit properties and methods from the ModelSerializer class
+class ArticleSerializer(serializers.ModelSerializer):
+    # Define the foreign key for the current model
+    owner = serializers.ReadOnlyField(source='owner.username')
+    class Meta:
+        # Define the model that should be associated with this serializer
+        model = Article
+        # Indicates which fields from the model should be included in the serializer
+        # In this way, the post field has write access by default. When a user creates a new comment, they also see the post it belongs to.
+        fields = [
+            'id',
+            'blog_subcategory_id',
+            'blog_article_author',
+            'blog_article_time',
+            'blog_article_title',
+            'blog_article_short_description',
+            'blog_article_content',
+            'blog_article_path',
+            'blog_article_is_active',
+            'blog_article_rating_system',
+            'blog_article_likes',
+            'blog_article_dislikes',
+            'owner'
+        ]
 
-# CommentSerializer class will inherit properties and methods from the ModelSerializer class
+# CategorySerializer class will inherit properties and methods from the ModelSerializer class
 class CommentSerializer(serializers.ModelSerializer):
     # Define the foreign key for the current model
     owner = serializers.ReadOnlyField(source='owner.username')
@@ -62,15 +87,21 @@ class CommentSerializer(serializers.ModelSerializer):
         # In this way, the post field has write access by default. When a user creates a new comment, they also see the post it belongs to.
         fields = [
             'id',
-            'body',
-            'owner',
-            'post'
+            'blog_article_id',
+            'full_name',
+            'email',
+            'comment',
+            'comment_is_public',
+            'privacy_policy',
+            'owner'
         ]
 
 # UserSerializer class will inherit properties and methods from the ModelSerializer class
 class UserSerializer(serializers.ModelSerializer):
     # Define the primary key for the current model
-    posts = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    categories = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    subcategories = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    articles = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     comments = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     class Meta:
         # Define the model that should be associated with this serializer
@@ -82,6 +113,8 @@ class UserSerializer(serializers.ModelSerializer):
             'email',
             'first_name',
             'last_name',
-            'posts',
+            'categories',
+            'subcategories',
+            'articles',
             'comments'
         ]

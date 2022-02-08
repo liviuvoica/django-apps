@@ -1,35 +1,89 @@
 from django.contrib import admin
 from blog_api.models import Category
-from blog_api.models import Post
+from blog_api.models import Subcategory
+from blog_api.models import Article
 from blog_api.models import Comment
 
 # Register your models here.
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'get_owner', 'created')
+    list_display = (
+        'id',
+        'blog_category_title',
+        'blog_category_short_description',
+        'blog_category_description',
+        'blog_category_is_active',
+        'blog_image_card_url',
+        'blog_category_path',
+        'get_owner',
+        'created_at',
+        'updated_at'
+    )
     
     def get_owner(self, obj):
         return str(obj.owner).upper()
     get_owner.short_description = "owner"
 
-class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'get_owner', 'created')
+class SubcategoryAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'blog_category_id',
+        'blog_subcategory_title',
+        'blog_subcategory_short_description',
+        'blog_subcategory_description',
+        'blog_subcategory_is_active',
+        'blog_subcategory_path',
+        'get_owner',
+        'created_at',
+        'updated_at'
+    )
     
+    def get_owner(self, obj):
+        return str(obj.owner).upper()
+    get_owner.short_description = "owner"
+
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'blog_subcategory_id',
+        'blog_article_author',
+        'blog_article_time',
+        'blog_article_title',
+        'blog_article_short_description',
+        'blog_article_content',
+        'blog_article_path',
+        'blog_article_is_active',
+        'blog_article_rating_system',
+        'blog_article_likes',
+        'blog_article_dislikes',
+        'get_owner',
+        'created_at',
+        'updated_at'
+    )
+
     def get_owner(self, obj):
         return str(obj.owner).upper()
     get_owner.short_description = "owner"
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('post', 'get_body', 'get_owner', 'created')
-    
-    def get_body(self, obj):
-        return obj.body[:100] + "..."
-    get_body.short_description = "body"
-    
+    list_display = (
+        'id',
+        'blog_article_id',
+        'full_name',
+        'email',
+        'comment',
+        'comment_is_public',
+        'privacy_policy',
+        'get_owner',
+        'created_at',
+        'updated_at'
+    )
+
     def get_owner(self, obj):
         return str(obj.owner).upper()
     get_owner.short_description = "owner"
 
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(Post, PostAdmin)
+admin.site.register(Subcategory, SubcategoryAdmin)
+admin.site.register(Article, ArticleAdmin)
 admin.site.register(Comment, CommentAdmin)
