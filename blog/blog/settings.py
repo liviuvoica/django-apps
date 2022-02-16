@@ -33,8 +33,6 @@ ALLOWED_HOSTS = []
 # For admin_reorder check: https://pypi.org/project/django-modeladmin-reorder/
 
 INSTALLED_APPS = [
-    'admin_interface',
-    'colorfield',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
