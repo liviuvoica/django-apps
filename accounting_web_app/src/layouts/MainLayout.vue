@@ -13,11 +13,9 @@
         <q-toolbar-title> Accounting Web Application </q-toolbar-title>
       </q-toolbar>
     </q-header>
-
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
+    <q-drawer v-model="leftDrawerOpen" show-if-above="false" bordered>
       <q-list>
-        <q-item-label header> Essential Links </q-item-label>
-
+        <q-item-label header> APPLICATION MENU </q-item-label>
         <EssentialLink
           v-for="link in essentialLinks"
           :key="link.title"
@@ -25,7 +23,6 @@
         />
       </q-list>
     </q-drawer>
-
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -37,16 +34,46 @@ import EssentialLink from '../components/EssentialLink.vue';
 
 const linksList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
+    title: 'First menu',
+    caption: '',
+    icon: '',
+    link: '',
+  },
+  {
+    title: 'Second menu',
+    caption: '',
+    icon: '',
+    link: '',
+  },
+  {
+    title: 'Third menu',
+    caption: '',
+    icon: '',
+    link: '',
+  },
+  {
+    title: 'Forth menu',
+    caption: '',
+    icon: '',
+    link: '',
+  },
+  {
+    title: 'Fifth menu',
+    caption: '',
+    icon: '',
+    link: '',
+  },
+  {
+    title: 'Quasar documentation',
+    caption: 'The official documentation of Quasar javascript framework',
     icon: 'school',
     link: 'https://quasar.dev',
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
+    title: 'Project source code',
+    caption: 'You can access the source code of this project by clicking this button',
     icon: 'code',
-    link: 'https://github.com/quasarframework',
+    link: '',
   }
 ];
 
