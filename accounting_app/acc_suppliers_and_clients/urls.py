@@ -11,6 +11,8 @@ urlpatterns = [
     path('suppliers/<int:pk>/', views.SupplierDetail.as_view()),
     path('clients/', views.ClientList.as_view()),
     path('clients/<int:pk>/', views.ClientDetail.as_view()),
+    path('chart-of-accounts/', views.ChartOfAccountList.as_view()),
+    path('chart-of-accounts/<int:pk>/', views.ChartOfAccountDetail.as_view()),
     path('users/', views.UserList.as_view()),
     path('users/<int:pk>/', views.UserDetail.as_view()),
 ]

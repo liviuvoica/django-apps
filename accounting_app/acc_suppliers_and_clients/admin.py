@@ -1,6 +1,7 @@
 from django.contrib import admin
 from acc_suppliers_and_clients.models import Supplier
 from acc_suppliers_and_clients.models import Client
+from acc_suppliers_and_clients.models import ChartOfAccount
 
 # Register your models here.
 
@@ -109,5 +110,31 @@ class ClientAdmin(admin.ModelAdmin):
         return str(obj.email_address).upper()
     get_email_address.short_description = "Adresa de email"
 
+class ChartOfAccountAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'get_account',
+        'get_name',
+        'get_type',
+        'get_is_active'
+    )
+    
+    def get_account(self, obj):
+        return str(obj.account).upper()
+    get_account.short_description = "Cont contabil"
+    
+    def get_name(self, obj):
+        return str(obj.name).upper()
+    get_name.short_description = "Denumire cont contabil"
+    
+    def get_type(self, obj):
+        return str(obj.type).upper()
+    get_type.short_description = "Tip cont contabil"
+    
+    def get_is_active(self, obj):
+        return str(obj.is_active).upper()
+    get_is_active.short_description = "Blocat?"
+
 admin.site.register(Supplier, SupplierAdmin)
 admin.site.register(Client, ClientAdmin)
+admin.site.register(ChartOfAccount, ChartOfAccountAdmin)

@@ -5,7 +5,7 @@ from django.db import models
 
 # Create your models here.
 
-# Suppliers model will have a many to one relationship
+# Supplier model will have a many to one relationship
 # with the User model via 'owner' foreign key
 # related_name refers to a custom access name for the current model
 class Supplier(models.Model):
@@ -26,13 +26,13 @@ class Supplier(models.Model):
 
     class Meta:
         ordering = ['created_at']
-        verbose_name_plural = 'Suppliers'
+        verbose_name_plural = 'Furnizori'
     
     def __str__(self):
         return self.name
 
 
-# Clients model will have a many to one relationship
+# Client model will have a many to one relationship
 # with the User model via 'owner' foreign key
 # related_name refers to a custom access name for the current model
 class Client(models.Model):
@@ -54,7 +54,27 @@ class Client(models.Model):
 
     class Meta:
         ordering = ['created_at']
-        verbose_name_plural = 'Clients'
+        verbose_name_plural = 'Clienti'
+    
+    def __str__(self):
+        return self.name
+
+
+# ChartOfAccount model will have a many to one relationship
+# with the User model via 'owner' foreign key
+# related_name refers to a custom access name for the current model
+class ChartOfAccount(models.Model):
+    account = models.CharField(max_length=13, blank=False, default='')
+    name = models.CharField(max_length=255, blank=False, default='')
+    type = models.CharField(max_length=1, blank=False, default='')
+    is_active = models.BooleanField(blank=False, default=False)
+    owner = models.ForeignKey('auth.User', related_name='chart_of_accounts', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(blank=True, default=datetime.now())
+    updated_at = models.DateTimeField(blank=True, default=datetime.now())
+
+    class Meta:
+        ordering = ['created_at']
+        verbose_name_plural = 'Plan de conturi'
     
     def __str__(self):
         return self.name
