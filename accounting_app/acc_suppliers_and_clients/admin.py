@@ -2,6 +2,7 @@ from django.contrib import admin
 from acc_suppliers_and_clients.models import Supplier
 from acc_suppliers_and_clients.models import Client
 from acc_suppliers_and_clients.models import ChartOfAccount
+from acc_suppliers_and_clients.models import Article
 
 # Register your models here.
 
@@ -135,6 +136,52 @@ class ChartOfAccountAdmin(admin.ModelAdmin):
         return str(obj.is_active).upper()
     get_is_active.short_description = "Blocat?"
 
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'get_code',
+        'get_name',
+        'get_um',
+        'get_vat',
+        'get_type',
+        'get_current_stock',
+        'get_sales_price',
+        'get_sales_price_vat',
+    )
+    
+    def get_code(self, obj):
+        return str(obj.code).upper()
+    get_code.short_description = "Cod articol"
+    
+    def get_name(self, obj):
+        return str(obj.name).upper()
+    get_name.short_description = "Denumire articol"
+    
+    def get_um(self, obj):
+        return str(obj.um).upper()
+    get_um.short_description = "Unitate de masura"
+    
+    def get_vat(self, obj):
+        return str(obj.vat).upper()
+    get_vat.short_description = "TVA %"
+    
+    def get_type(self, obj):
+        return str(obj.type).upper()
+    get_type.short_description = "Tip articol"
+    
+    def get_current_stock(self, obj):
+        return str(obj.current_stock).upper()
+    get_current_stock.short_description = "Stoc current"
+    
+    def get_sales_price(self, obj):
+        return str(obj.sales_price).upper()
+    get_sales_price.short_description = "Pret de vanzare"
+    
+    def get_sales_price_vat(self, obj):
+        return str(obj.sales_price_Vat).upper()
+    get_sales_price_vat.short_description = "Pret de vanzare cu TVA"
+
 admin.site.register(Supplier, SupplierAdmin)
 admin.site.register(Client, ClientAdmin)
 admin.site.register(ChartOfAccount, ChartOfAccountAdmin)
+admin.site.register(Article, ArticleAdmin)

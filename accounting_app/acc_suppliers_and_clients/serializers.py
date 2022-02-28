@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from acc_suppliers_and_clients.models import Supplier
 from acc_suppliers_and_clients.models import Client
 from acc_suppliers_and_clients.models import ChartOfAccount
+from acc_suppliers_and_clients.models import Article
 
 
 # SupplierSerializer class will inherit properties and methods from the ModelSerializer class
@@ -77,6 +78,29 @@ class ChartOfAccountSerializer(serializers.ModelSerializer):
             'name',
             'type',
             'is_active',
+            'owner',
+        ]
+
+
+# ArticleSerializer class will inherit properties and methods from the ModelSerializer class
+class ArticleSerializer(serializers.ModelSerializer):
+    # Define the foreign key for the current model
+    owner = serializers.ReadOnlyField(source='owner.username')
+    class Meta:
+        # Define the model that should be associated with this serializer
+        model = Article
+        # Indicates which fields from the model should be included in the serializer
+        # In this way, the post field has write access by default. When a user creates a new comment, they also see the post it belongs to.
+        fields = [
+            'id',
+            'code',
+            'name',
+            'um',
+            'vat',
+            'type',
+            'current_stock',
+            'sales_price',
+            'sales_price_vat',
             'owner',
         ]
 

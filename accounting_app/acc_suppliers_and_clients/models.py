@@ -78,3 +78,27 @@ class ChartOfAccount(models.Model):
     
     def __str__(self):
         return self.name
+
+
+# Article model will have a many to one relationship
+# with the User model via 'owner' foreign key
+# related_name refers to a custom access name for the current model
+class Article(models.Model):
+    code = models.CharField(max_length=10, blank=False, default='')
+    name = models.CharField(max_length=255, blank=False, default='')
+    um = models.CharField(max_length=10, blank=False, default='')
+    vat = models.IntegerField(blank=False, default=0)
+    type = models.CharField(max_length=100, blank=False, default='')
+    current_stock = models.IntegerField(blank=False, default=0)
+    sales_price = models.IntegerField(blank=False, default=0)
+    sales_price_vat = models.IntegerField(blank=False, default=0)    
+    owner = models.ForeignKey('auth.User', related_name='articles', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(blank=True, default=datetime.now())
+    updated_at = models.DateTimeField(blank=True, default=datetime.now())
+
+    class Meta:
+        ordering = ['created_at']
+        verbose_name_plural = 'Nomenclator articole'
+    
+    def __str__(self):
+        return self.name
