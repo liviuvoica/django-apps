@@ -19,6 +19,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('acc_suppliers_and_clients.urls')),
+    # path('', include('acc_operations.urls')),
     # Prevent users to create, edit and / or delete blog post if they are not authenticated
     path('api-auth/', include('rest_framework.urls')),
 ]
